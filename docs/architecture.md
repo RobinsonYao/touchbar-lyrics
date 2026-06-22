@@ -51,3 +51,25 @@ sync_engine.py
 ↓
 
 btt_output.py
+
+Output Layer
+
+Purpose:
+Decouple lyric rendering from lyric engine.
+
+Interfaces:
+    OutputBase.send(text)
+
+Implementations:
+    TerminalOutput
+    TouchBarOutput (future)
+    MenuBarOutput (future)
+    DesktopOutput (future)
+
+Dependency Direction:
+
+runtime
+    ↓
+OutputBase
+    ↓
+TerminalOutput / TouchBarOutput
