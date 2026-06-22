@@ -73,3 +73,26 @@ runtime
 OutputBase
     ↓
 TerminalOutput / TouchBarOutput
+
+Player Layer
+    Apple Music
+
+Provider Layer
+    NetEase
+
+Cache Layer
+    CacheManager
+
+Parser Layer
+    LRCParser
+
+Sync Layer
+    SyncEngine
+
+Output Layer
+    OutputBase
+        TerminalOutput
+        TouchBarOutput
+
+Runtime Layer
+    realtime_player
