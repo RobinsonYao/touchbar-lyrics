@@ -1,5 +1,7 @@
 from AppKit import (
     NSApplication,
+    NSApplicationActivationPolicyAccessory,
+    NSApplicationActivationPolicyProhibited,
     NSStatusBar,
     NSMenu,
     NSMenuItem
@@ -7,11 +9,12 @@ from AppKit import (
 
 app = NSApplication.sharedApplication()
 
-# 创建菜单栏图标
+# 尝试真正 Agent 模式
+app.setActivationPolicy_(NSApplicationActivationPolicyProhibited)
+
 status_item = NSStatusBar.systemStatusBar().statusItemWithLength_(-1)
 status_item.button().setTitle_("🎵")
 
-# 创建菜单
 menu = NSMenu.alloc().init()
 
 menu.addItem_(

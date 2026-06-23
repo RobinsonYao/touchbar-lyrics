@@ -7,11 +7,14 @@ from AppKit import (
 
 app = NSApplication.sharedApplication()
 
-# 创建菜单栏图标
+# 隐藏 Dock
+app.setActivationPolicy_(2)
+
+# 菜单栏图标
 status_item = NSStatusBar.systemStatusBar().statusItemWithLength_(-1)
 status_item.button().setTitle_("🎵")
 
-# 创建菜单
+# 菜单
 menu = NSMenu.alloc().init()
 
 menu.addItem_(
