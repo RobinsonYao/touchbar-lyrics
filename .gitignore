@@ -16,3 +16,10 @@ snapshot/
 
 # IDE
 .vscode/
+.idea/
+
+# Logs / Output
+logs/
+output/
+dist/
+build/
