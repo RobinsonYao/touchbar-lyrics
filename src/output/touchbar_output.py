@@ -67,7 +67,7 @@ class TouchBarOutput(OutputBase):
         self.label = NSTextField.labelWithString_("...")
 
         self.window = TouchBarWindow.alloc().initWithContentRect_styleMask_backing_defer_(
-            NSMakeRect(100, 100, 400, 300),
+            NSMakeRect(-10000, -10000, 1, 1),
             15,
             NSBackingStoreBuffered,
             False
@@ -77,11 +77,13 @@ class TouchBarOutput(OutputBase):
 
         self.window.setTitle_("TouchBar Lyrics")
 
-        self.window.makeKeyAndOrderFront_(None)
+        #self.window.makeKeyAndOrderFront_(None)
         self.window.makeFirstResponder_(self.window)
-        self.window.becomeKeyWindow()
+        #self.window.becomeKeyWindow()
         self.window.orderFrontRegardless()
         self.window.setAlphaValue_(0)
+
+        self.window.setIgnoresMouseEvents_(True)
 
         self._initialized = True
         self.window.setContentView_(self.window.contentView())

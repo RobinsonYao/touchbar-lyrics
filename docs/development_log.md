@@ -35,3 +35,24 @@ NSApplicationActivationPolicyProhibited suppresses TouchBar.
 Accessory mode works.
 
 Ghost Window selected for V1.x.
+
+V1.1-B2-D1
+
+完成 Menubar 动态菜单控制。
+
+新增：
+
+- Collapse TouchBar
+- Expand TouchBar
+
+实现：
+
+EXPANDED ⇄ COLLAPSED
+
+状态机。
+
+MenuActions 独立负责菜单回调。
+
+MenuApp 负责状态切换。
+
+TouchBar 与 Menubar 共用 AppState。

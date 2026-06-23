@@ -46,3 +46,11 @@ V1.1-B0
 - Accessory mode selected
 - KeyWindow dependence identified
 - Ghost Window strategy selected
+
+V1.1-B2-D1
+
+- AppState 成为唯一状态中心
+- current_lyric 接入
+- Menubar fallback 架构完成
+- 动态菜单完成
+- 用户主动展开/收起功能完成

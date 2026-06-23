@@ -9,17 +9,18 @@ from src.lrc_parser import LRCParser
 from src.sync_engine import SyncEngine
 from src.cache_manager import CacheManager
 from src.output.touchbar_output import TouchBarOutput
+from state.app_state import AppState
 
 
 
 # =========================
 # STATE
 # =========================
-class State:
-    song_key = None
-    timeline = None
-    match = None
-    last_lyric = None
+# class State:
+#     song_key = None
+#     timeline = None
+#     match = None
+#     last_lyric = None
 
 
 def build_song_key(track):
@@ -48,8 +49,15 @@ def fast_loop(
     )
 
     if lyric != state.last_lyric:
+
+        # 保存当前歌词
+        state.set_lyric(lyric)
+
+        # 输出到 TouchBar
         output.send(lyric)
+        print("CURRENT:", state.current_lyric)      
         print("SEND:", lyric)
+
         state.last_lyric = lyric
 
 
@@ -184,7 +192,7 @@ def main():
 
     CacheManager.init()
 
-    state = State()
+    state = AppState()
 
     output = TouchBarOutput()
 
