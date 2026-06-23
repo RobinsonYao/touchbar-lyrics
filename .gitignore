@@ -11,5 +11,8 @@ __pycache__/
 # Runtime Cache
 cache/
 
+# Snapshots
+snapshot/
+
 # IDE
 .vscode/

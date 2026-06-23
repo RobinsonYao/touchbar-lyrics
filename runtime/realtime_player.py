@@ -1,12 +1,14 @@
 import time
 import sys
+import threading
 
+from AppKit import NSApplication
 from src.player import AppleMusicPlayer
 from src.netease_provider import NeteaseProvider
 from src.lrc_parser import LRCParser
 from src.sync_engine import SyncEngine
 from src.cache_manager import CacheManager
-from src.output.terminal_output import TerminalOutput
+from src.output.touchbar_output import TouchBarOutput
 
 
 
@@ -47,6 +49,7 @@ def fast_loop(
 
     if lyric != state.last_lyric:
         output.send(lyric)
+        print("SEND:", lyric)
         state.last_lyric = lyric
 
 
@@ -139,19 +142,7 @@ def slow_loop(state, track):
     state.song_key = song_key
     state.last_lyric = None
 
-
-# =========================
-# MAIN LOOP
-# =========================
-def main():
-
-    CacheManager.init()
-
-    state = State()
-
-    output = TerminalOutput()     # ← 新增这一行
-
-    print("\nRealtime Player Started (Stable Mode)\n")
+def run_loop(state, output):
 
     fast_tick = 0.25
     slow_tick = 3.0
@@ -166,14 +157,12 @@ def main():
             time.sleep(1)
             continue
 
-        # FAST PATH
         fast_loop(
             state,
             track,
             output
         )
 
-        # SLOW PATH
         now = time.time()
 
         if now - last_slow > slow_tick:
@@ -188,5 +177,29 @@ def main():
         time.sleep(fast_tick)
 
 
-if __name__ == "__main__":
-    main()
+# =========================
+# MAIN LOOP
+# =========================
+def main():
+
+    CacheManager.init()
+
+    state = State()
+
+    output = TouchBarOutput()
+
+    output.init_touchbar()
+
+    print("\nRealtime Player Started (Stable Mode)\n")
+
+    worker = threading.Thread(
+        target=run_loop,
+        args=(state, output),
+        daemon=True
+    )
+
+    worker.start()
+
+    app = NSApplication.sharedApplication()
+
+    app.run()

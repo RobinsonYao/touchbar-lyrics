@@ -1,36 +1,8 @@
-# System Architecture
+# Architecture
+
+## 系统架构
 
 Apple Music
-
-↓
-
-Player Layer
-
-↓
-
-Lyric Provider
-
-↓
-
-LRC Parser
-
-↓
-
-Sync Engine
-
-↓
-
-Output Layer
-
-↓
-
-Terminal / BetterTouchTool / Touch Bar
-
----
-
-Module Dependency
-
-main.py
 
 ↓
 
@@ -38,7 +10,11 @@ player.py
 
 ↓
 
-lyric_provider.py
+netease_provider.py
+
+↓
+
+cache_manager.py
 
 ↓
 
@@ -50,49 +26,83 @@ sync_engine.py
 
 ↓
 
-btt_output.py
+touchbar_output.py
 
-Output Layer
+↓
 
-Purpose:
-Decouple lyric rendering from lyric engine.
+MacBook Touch Bar
 
-Interfaces:
-    OutputBase.send(text)
+---
 
-Implementations:
-    TerminalOutput
-    TouchBarOutput (future)
-    MenuBarOutput (future)
-    DesktopOutput (future)
+## 模块说明
 
-Dependency Direction:
+### player.py
 
-runtime
-    ↓
-OutputBase
-    ↓
-TerminalOutput / TouchBarOutput
+负责获取 Apple Music 当前播放信息。
 
-Player Layer
-    Apple Music
+输出：
 
-Provider Layer
-    NetEase
+* 歌曲名
+* 歌手
+* 时长
+* 当前播放位置
 
-Cache Layer
-    CacheManager
+---
 
-Parser Layer
-    LRCParser
+### netease_provider.py
 
-Sync Layer
-    SyncEngine
+负责：
 
-Output Layer
-    OutputBase
-        TerminalOutput
-        TouchBarOutput
+* 搜索歌曲
+* 最佳匹配
+* 下载歌词
 
-Runtime Layer
-    realtime_player
+---
+
+### cache_manager.py
+
+负责：
+
+* 歌词缓存
+* 缓存读取
+* 缓存保存
+
+---
+
+### lrc_parser.py
+
+负责：
+
+* LRC解析
+* 时间轴生成
+
+---
+
+### sync_engine.py
+
+负责：
+
+* 根据播放时间查找当前歌词
+
+---
+
+### touchbar_output.py
+
+负责：
+
+* Touch Bar 初始化
+* 歌词显示
+* Touch Bar 更新
+
+---
+
+### realtime_player.py
+
+系统运行主循环。
+
+职责：
+
+* 歌曲切换检测
+* 歌词加载
+* 同步调度
+* 输出调度

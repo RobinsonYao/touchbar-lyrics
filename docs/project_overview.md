@@ -1,105 +1,64 @@
 # TouchBar Lyrics
 
-## Project Goal
+## 项目简介
 
-为 macOS Apple Music 提供实时同步歌词显示。
+TouchBar Lyrics 是一个运行于 macOS 的实时歌词显示工具。
 
-系统通过读取 Apple Music 当前播放状态，获取歌曲对应歌词，并根据播放进度实时同步显示。
+程序自动读取 Apple Music 当前播放歌曲，通过网易云音乐接口搜索并获取歌词，完成歌词解析、缓存与同步，并最终在 MacBook Touch Bar 上实时显示歌词。
 
-初期输出到终端。
-
-后期支持：
-
-* BetterTouchTool
-* Touch Bar
-* 菜单栏歌词
-* 双语歌词
-* 本地缓存
+项目目标是在不修改 Apple Music 的前提下，为 Touch Bar 提供类似原生播放器的实时歌词体验。
 
 ---
 
-## MVP
+## 当前功能
 
-Apple Music
+### 歌曲识别
 
-↓
+* 自动获取 Apple Music 当前播放歌曲
+* 获取歌曲名称
+* 获取歌手名称
+* 获取歌曲时长
 
-读取歌曲信息
+### 歌词匹配
 
-↓
+* 网易云音乐搜索
+* 歌名匹配
+* 歌手匹配
+* 时长匹配
 
-获取歌词
+### 歌词处理
 
-↓
+* 下载 LRC 歌词
+* LRC 解析
+* 时间轴生成
+* 实时歌词同步
 
-同步歌词
+### 本地缓存
 
-↓
+* 歌词自动缓存
+* 缓存优先读取
+* 减少网络请求
 
-终端显示
+### Touch Bar 输出
 
----
-
-## Core Modules
-
-### Player Layer
-
-负责获取：
-
-* Song Name
-* Artist
-* Album
-* Position
-* State
-
-### Lyric Provider Layer
-
-负责：
-
-* 网易云歌词
-* QQ音乐歌词
-
-### LRC Parser Layer
-
-负责：
-
-* LRC解析
-* 时间轴建立
-
-### Sync Engine
-
-负责：
-
-* 歌词同步
-
-### Output Layer
-
-负责：
-
-* Terminal
-* BetterTouchTool
-* Touch Bar
+* 实时歌词显示
+* 自动随歌曲切换
+* 自动同步当前播放进度
 
 ---
 
-## Development Stages
+## 技术栈
 
-V0.1
+* Python 3.11
+* PyObjC
+* AppleScript
+* Apple Music
+* NetEase Music API
 
-Apple Music 信息读取
+---
 
-V0.2
+## 当前状态
 
-歌词获取
+V1.0-alpha
 
-V0.3
-
-歌词同步
-
-V0.4
-
-Touch Bar 输出
-
-V1.0
-
-完整产品
+核心功能已完成验证，可正常运行。
