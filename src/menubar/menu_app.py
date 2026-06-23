@@ -1,6 +1,14 @@
+import threading
+import time
+from runtime.realtime_player import (
+    State,
+    run_loop
+)
+from src.output.touchbar_output import TouchBarOutput
+from src.cache_manager import CacheManager
 from AppKit import (
     NSApplication,
-    NSApplicationActivationPolicyProhibited,
+    NSApplicationActivationPolicyAccessory,
     NSStatusBar,
     NSMenu,
     NSMenuItem
@@ -15,7 +23,7 @@ class MenuApp:
 
         # 真正后台 Agent
         self.app.setActivationPolicy_(
-            NSApplicationActivationPolicyProhibited
+            NSApplicationActivationPolicyAccessory
         )
 
         # 菜单栏图标
@@ -46,5 +54,21 @@ class MenuApp:
         self.status_item.setMenu_(self.menu)
 
     def run(self):
+
+        CacheManager.init()
+
+        state = State()
+
+        output = TouchBarOutput()
+
+        output.init_touchbar()
+
+        worker = threading.Thread(
+            target=run_loop,
+            args=(state, output),
+            daemon=True
+        )
+
+        worker.start()
 
         self.app.run()

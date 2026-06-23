@@ -200,6 +200,6 @@ def main():
 
     worker.start()
 
-    app = NSApplication.sharedApplication()
+    # app = NSApplication.sharedApplication()
 
-    app.run()
+    # app.run()

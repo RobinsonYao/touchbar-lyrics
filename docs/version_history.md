@@ -31,3 +31,18 @@ V1.1-beta
 * Metadata过滤
 * Touch Bar优化
 * 后台运行模式
+
+V1.1-A
+
+- MenuBar architecture
+- Agent mode
+- No Dock icon
+- No Command+Tab entry
+
+V1.1-B0
+
+- Unified NSApplication owner
+- TouchBar and MenuBar coexist
+- Accessory mode selected
+- KeyWindow dependence identified
+- Ghost Window strategy selected

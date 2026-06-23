@@ -63,7 +63,6 @@ class TouchBarOutput(OutputBase):
         if self._initialized:
             return
 
-        self.app = NSApplication.sharedApplication()
 
         self.label = NSTextField.labelWithString_("...")
 
@@ -82,6 +81,7 @@ class TouchBarOutput(OutputBase):
         self.window.makeFirstResponder_(self.window)
         self.window.becomeKeyWindow()
         self.window.orderFrontRegardless()
+        self.window.setAlphaValue_(0)
 
         self._initialized = True
         self.window.setContentView_(self.window.contentView())

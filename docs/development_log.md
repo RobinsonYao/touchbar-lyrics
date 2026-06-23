@@ -21,3 +21,17 @@
 版本定义：
 
 V1.0-alpha
+
+2026-06-23
+
+Key findings:
+
+NSTouchBar depends on KeyWindow.
+
+orderOut() destroys TouchBar ownership.
+
+NSApplicationActivationPolicyProhibited suppresses TouchBar.
+
+Accessory mode works.
+
+Ghost Window selected for V1.x.

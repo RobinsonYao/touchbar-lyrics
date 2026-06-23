@@ -1,3 +1,5 @@
-from runtime.realtime_player import main
+from src.menubar.menu_app import MenuApp
 
-main()
+app = MenuApp()
+
+app.run()
